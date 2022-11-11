@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: d3557257abf5a63bc80d00672605582e
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Slope Opera
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 40d3cdaa4c774df218c33f35a2d0458e, type: 3}
+  - {fileID: 12800000, guid: e88bac44d05b5a1ff87009690f1fa19c, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
