@@ -7,6 +7,7 @@ public class TriggerScript : MonoBehaviour
     [SerializeField] GameObject[] objects;
     public Rigidbody rb;
     public GameObject boost;
+    public GameObject background;
     public int currentDistance = 1;
     public int points = 0;
 
@@ -21,6 +22,7 @@ public class TriggerScript : MonoBehaviour
         if (collider.gameObject.CompareTag("Point")) {
             points++;
             Text.Update(points);
+            // Insert deletion code
         }
         if (collider.gameObject.CompareTag("Ramp")) {
             rb = GetComponent<Rigidbody>();
@@ -66,14 +68,17 @@ public class TriggerScript : MonoBehaviour
     // Structure 6 is moving cube
 
     public static float[] structs = {90f, 90f, 110f, 110f, 160f, 125f, 60f};
+    int genCount = 0;
     public void GenerateStructure(int structure, bool trigger) {
         //currentZ += zStep;
         currentY -= yStep;
 
         currentZ += structs[structure];
+        if (structure == 6) currentY += 10f;
         
         int xRandom = Random.Range(1,15);
         Instantiate(objects[structure], new Vector3(-30f + xRandom, currentY, currentZ), Quaternion.identity);
+        if (genCount % 5 == 0) Instantiate(background, new Vector3(150f + xRandom, currentY + 20f, currentZ), Quaternion.identity);
         if (trigger == true) {
             // currentZ += zStep;
             currentZ += 100f;
@@ -82,6 +87,7 @@ public class TriggerScript : MonoBehaviour
             Instantiate(boost, new Vector3(-30f + xRandom, currentY, currentZ), Quaternion.identity);
         }
 
+        genCount++;
         trigger = false;
     }
 }
