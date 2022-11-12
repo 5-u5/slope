@@ -26,7 +26,7 @@ public class TriggerScript : MonoBehaviour
         }
         if (collider.gameObject.CompareTag("Ramp")) {
             rb = GetComponent<Rigidbody>();
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z+300f * Time.deltaTime);
+            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y + 10f, rb.velocity.z+1000f * Time.deltaTime);
         }
         if (collider.gameObject.CompareTag("Trigger")) {
             if (currentDistance < 2) {
@@ -42,19 +42,17 @@ public class TriggerScript : MonoBehaviour
                 //Debug.Log("Current Distance is " + currentDistance);
             }
             else {
-                int structure;
-                if (currentDistance > 2) structure = Random.Range(3,objects.Length);
-                else structure = Random.Range(0,3);
-                for (int x = 1; x <= 3; x++) {
-                    for (int j = 1; j < currentDistance; j ++) {
+                int structure = 0;
+                for (int j = 1; j < currentDistance; j ++) {
+                    if (currentDistance > 2) structure = Random.Range(3,objects.Length);
+                    else structure = Random.Range(0,3);
+                    for (int k = 1; k < currentDistance; k ++) {
                         GenerateStructure(structure, trigger);
-                    }
-                    if (x == 3) {
-                        trigger = true;
-                        GenerateStructure(structure, trigger);
-                        trigger = false;
                     }
                 }
+                trigger = true;
+                GenerateStructure(structure, trigger);
+                trigger = false;
                 if (currentDistance < 4) currentDistance++;
             }
         }
@@ -67,7 +65,7 @@ public class TriggerScript : MonoBehaviour
     // Structure 5 is 3 red
     // Structure 6 is moving cube
 
-    public static float[] structs = {90f, 90f, 110f, 110f, 160f, 125f, 60f};
+    public static float[] structs = {90f, 90f, 110f, 110f, 160f, 145f, 60f};
     int genCount = 0;
     public void GenerateStructure(int structure, bool trigger) {
         //currentZ += zStep;
@@ -83,7 +81,6 @@ public class TriggerScript : MonoBehaviour
             // currentZ += zStep;
             currentZ += 100f;
             currentY -= yStep;
-            Debug.Log("Generating Trigger");
             Instantiate(boost, new Vector3(-30f + xRandom, currentY, currentZ), Quaternion.identity);
         }
 
