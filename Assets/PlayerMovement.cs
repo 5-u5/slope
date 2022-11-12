@@ -22,13 +22,13 @@ public class PlayerMovement : MonoBehaviour
     {
         c = cam.GetComponent<Camera>();
         if (Input.GetKey("a")) {
-            rb.velocity = new Vector3(rb.velocity.x-0.3f, rb.velocity.y, rb.velocity.z);
+            rb.velocity = new Vector3(rb.velocity.x-70f * Time.deltaTime, rb.velocity.y, rb.velocity.z);
         }
         if (Input.GetKey("d")) {
-            rb.velocity = new Vector3(rb.velocity.x+0.3f, rb.velocity.y, rb.velocity.z);
+            rb.velocity = new Vector3(rb.velocity.x+70f * Time.deltaTime, rb.velocity.y, rb.velocity.z);
         }
         
-        c.fieldOfView = 98 + (rb.velocity.z * .3f);
+        c.fieldOfView = 98 + (rb.velocity.z * .15f);
         if (collidingWithFloor) {
             //rb.velocity += Vector3.Lerp(rb.velocity, rb.velocity.normalized * playerSpeed * 1, Time.deltaTime * 100099f) * 0.01f;
             rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z + playerSpeed * Time.deltaTime);
