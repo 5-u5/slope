@@ -29,11 +29,7 @@ public class PlayerMovement : MonoBehaviour
         }
         
         c.fieldOfView = 98 + (rb.velocity.z * .15f);
-        if (collidingWithFloor) {
-            //rb.velocity += Vector3.Lerp(rb.velocity, rb.velocity.normalized * playerSpeed * 1, Time.deltaTime * 100099f) * 0.01f;
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z + playerSpeed * Time.deltaTime);
-            collidingWithFloor = true;
-        }
+        if (collidingWithFloor) rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z + playerSpeed * Time.deltaTime);
         timer += Time.deltaTime;
         if (timer > i) {
             i+=20f;
@@ -42,6 +38,5 @@ public class PlayerMovement : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.CompareTag("Floor")) collidingWithFloor = true;
-        else collidingWithFloor = false;
     }
 }
