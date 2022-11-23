@@ -25,6 +25,6 @@ public class Die : MonoBehaviour
         Invoke(nameof(ReloadLevel), 2.3f);
     }
     void ReloadLevel() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

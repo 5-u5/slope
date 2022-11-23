@@ -15,7 +15,7 @@ public class Fall : MonoBehaviour
         Invoke(nameof(ReloadLevel), 3.3f);
     }
     void ReloadLevel() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         dead = false;
     }
     public static int check() {

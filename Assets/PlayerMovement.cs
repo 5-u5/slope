@@ -22,13 +22,13 @@ public class PlayerMovement : MonoBehaviour
     {
         c = cam.GetComponent<Camera>();
         if (Input.GetKey("a")) {
-            rb.velocity = new Vector3(rb.velocity.x-70f * Time.deltaTime, rb.velocity.y, rb.velocity.z);
+            rb.velocity = new Vector3(rb.velocity.x-90f * Time.deltaTime, rb.velocity.y, rb.velocity.z);
         }
         if (Input.GetKey("d")) {
-            rb.velocity = new Vector3(rb.velocity.x+70f * Time.deltaTime, rb.velocity.y, rb.velocity.z);
+            rb.velocity = new Vector3(rb.velocity.x+90f * Time.deltaTime, rb.velocity.y, rb.velocity.z);
         }
         
-        c.fieldOfView = 98 + (rb.velocity.z * .15f);
+        c.fieldOfView = 88 + (rb.velocity.z * .1f);
         if (collidingWithFloor) rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z + playerSpeed * Time.deltaTime);
         timer += Time.deltaTime;
         if (timer > i) {
@@ -38,5 +38,9 @@ public class PlayerMovement : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.CompareTag("Floor")) collidingWithFloor = true;
+    }
+
+    void OnCollisionStay(Collision collision) {
+        if (collision.gameObject.CompareTag("Ramp")) rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y + 7 * playerSpeed * Time.deltaTime, rb.velocity.z + playerSpeed / 20 * Time.deltaTime);
     }
 }
